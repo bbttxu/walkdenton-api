@@ -8,4 +8,4 @@ before_script:
 - sudo apt-get update -q
 - sudo apt-get install rethinkdb --force-yes
 - rethinkdb --version
-- rethinkdb &
+- rethinkdb --driver-port 28015 --bind localhost &
