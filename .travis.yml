@@ -4,3 +4,8 @@ node_js:
   - "0.10"
   - "0.8"
   - "0.6"
+
+before_script:
+- sudo add-apt-repository ppa:rethinkdb/ppa -y
+- sudo apt-get update -q
+- sudo apt-get install rethinkdb
