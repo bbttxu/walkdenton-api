@@ -16,7 +16,7 @@ randomIn = (first, second)->
   val = ((100.0 * Math.random() * (max - min))/100) + min
   val
 
-Intersection.save
+intersection = Intersection.save
   coordinates: [randomIn(maxLng, minLng), randomIn(maxLat, minLat)]
   nRoads: Math.floor randomIn 1, 4
   nCrosswalks: Math.floor randomIn 1, 4
@@ -27,8 +27,24 @@ restify = require 'restify'
 server = restify.createServer
   name: 'walkdenton-api'
 
+server.use()
 
 server.get '/intersections', (req, res, next)->
+  query = new thinky.Query(Intersection)
+  query.run().then (val)->
+    res.send val
+    next()
+
+server.get '/intersections/:id', (req, res, next)->
+  id = req.params.id
+
+  query = new thinky.Query(Intersection)
+  query.get(id).run().then (val)->
+    res.send val
+    next()
+
+
+server.post '/intersections', (req, res, next)->
   query = new thinky.Query(Intersection)
   query.run().then (val)->
     res.send val

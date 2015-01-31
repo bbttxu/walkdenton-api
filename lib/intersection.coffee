@@ -8,5 +8,9 @@ Intersection = thinky.createModel "Intersection",
 	coordinates: "Point"
 	nRoads: type.number().integer()
 	nCrosswalks: type.number().integer()
+	rating:
+		_type: 'virtual'
+		default: ()->
+			this.nRoads - this.nCrossWalks
 
 module.exports = Intersection
